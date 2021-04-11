@@ -1,0 +1,23 @@
+{
+  "name": "powerrent",
+  "version": "1.0.0",
+  "description": "Powercord + Torrent",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Crenshaw1312/Powerrent.git"
+  },
+  "author": "Crenshaw#1312 + Team Pirate Haven",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Crenshaw1312/Powerrent/issues"
+  },
+  "homepage": "https://github.com/Crenshaw1312/Powerrent#readme",
+  "dependencies": {
+    "got": "^11.8.2",
+    "torrent-search-api": "^2.1.3"
+  }
+}
