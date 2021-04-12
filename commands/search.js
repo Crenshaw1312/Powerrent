@@ -10,11 +10,15 @@ module.exports = {
     executor: async (args, main) => {
 
         // need args
-        if (!args[0]) return {send: false, result: "Please provide a search"}
-
-            // enable providers
-            TorrentSearchApi.enablePublicProviders()
-            main.settings.get('blacklistedSites').forEach(provider => TorrentSearchApi.disableProvider(provider))
+        if (!args[0]) {
+            return powercord.api.notices.sendToast('Powerrent', {
+                header: `Please provide a search`,
+                timeout: 3e3
+            })
+        }
+        // enable providers
+        TorrentSearchApi.enablePublicProviders()
+        main.settings.get('blacklistedSites').forEach(provider => TorrentSearchApi.disableProvider(provider))
 
         // setup flags
         let flags = [
@@ -23,6 +27,22 @@ module.exports = {
             {name: "max", args: ["number"]}
         ]
         let parameters = await flagParse(flags, args.join(" "));
+
+        // deal with site
+        let tracker = parameters.get('site')
+        if (tracker) {
+            try {
+            tracker = TorrentSearchApi.getProvider(tracker[0])
+                TorrentSearchApi.disableAllProviders()
+                TorrentSearchApi.enableProvider(tracker.name)
+            } catch (err) {
+                return powercord.api.notices.sendToast('Powerrent', {
+                    header: `Invalid site/tracker name`,
+                    timeout: 3e3
+                })
+            }
+
+        }
 
         // deal with category
         let category = 'All'
@@ -38,19 +58,24 @@ module.exports = {
                     noSearch.push(provider.name)
                 }
             })
-            await powercord.api.notices.sendToast('Powerrent', {
-                header: `Could not search all trackers for the ${category.toLowerCase()} category`,
-                content: noSearch.join(", "),
-                timeout: 30e3
-            })
+
+            // show notif for not-search trackers
+            if (noSearch[0]) {
+                await powercord.api.notices.sendToast('Powerrent', {
+                    header: `Could not search all trackers for the ${category.toLowerCase()} category`,
+                    content: noSearch.join(", "),
+                    timeout: 30e3
+                })
+            }
         }
 
         // search
-        const torrents = await TorrentSearchApi.search(parameters.get("noFlag").join(" "), category, main.settings.get('searchMax'));
+        const torrents = await TorrentSearchApi.search(parameters.get("noFlag").join(" "), category, parameters.get('max') ? parameters.get('max')[0] : main.settings.get('searchMax'));
+        // no results
         if (!torrents[0]) {
             return powercord.api.notices.sendToast('Powerrent', {
                 header: `No results`,
-                timeout: 5e3
+                timeout: 3e3
             })
         }
         return openModal(() => React.createElement(SearchResults, {results: torrents, search: `Searched for \"${parameters.get("noFlag").join(" ")}\" in ${category} - \\  _ \\`}));
