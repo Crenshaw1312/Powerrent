@@ -1,6 +1,6 @@
 const { Plugin } = require('powercord/entities');
 const commands = require('./commands');
-const Settings = require('./Settings');
+const Settings = require('./components/Settings');
 
 module.exports = class Powerrent extends Plugin {
 
