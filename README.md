@@ -5,6 +5,8 @@ Made by Crenshaw#1312
 
 Special thanks to: Team Pirate Haven for all the help!
 
+Join the support server: https://discord.gg/CgapbDJ8GX
+
 > Disclaimer: Myself and Team Pirate Haven take no responsibility for any consequences, actions, events, lawsuits, crashes, discord ban/termination, or anything else that occur while using this plugin
 
 ## What is Powerrent?
@@ -16,6 +18,8 @@ git clone https://github.com/Crenshaw1312/Powerrent
 cd Powerrent
 npm i
 ```
+
+> Beta: https://canary.discord.com/channels/830994358807298060/831041158883835914/831271585909702688
 ### Settings
 **Max Search Results**
 
