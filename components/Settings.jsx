@@ -61,7 +61,7 @@ module.exports = class PowerrentSettings extends React.PureComponent {
                   <TextInput
                     note="Password"
                     defaultValue={getSetting(`${tsa.name}Password`, "")}
-                    required={getSetting(`${tsa.name}Username`) ? true : false}
+                    required={false}
                     onChange={val => updateSetting(`${tsa.name}Password`, val)}
                   >
                   </TextInput>
