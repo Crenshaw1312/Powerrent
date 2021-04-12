@@ -73,12 +73,12 @@ module.exports = class PowerrentSettings extends React.PureComponent {
 	}
 
   _blacklistToggle (name) {
-    const blacklistedSites = getSetting('blacklistedSites', []);
+    const blacklistedSites = this.props.getSetting('blacklistedSites', []);
 
     if (!blacklistedSites.includes(name)) {
-      updateSetting('blacklistedSites', [ ...blacklistedSites, name ]);
+      this.props.updateSetting('blacklistedSites', [ ...blacklistedSites, name ]);
     } else {
-      updateSetting('blacklistedSites', blacklistedSites.filter(t => t !== name));
+      this.props.updateSetting('blacklistedSites', blacklistedSites.filter(t => t !== name));
     }
   }
 
