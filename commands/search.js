@@ -23,7 +23,7 @@ module.exports = {
         TorrentSearchApi.getProviders().filter(p => !p.public).map((provider) => {
             if (main.setings.get(`${provider.name}Username`) !== "" || main.setings.get(`${provider.name}Password` !== "")) {
                 try {
-                    await TorrentSearchApi.enableProvider(provider.name, main.setings.get(`${provider.name}Username`), main.settings.get(`${provider.name}Password`))
+                    TorrentSearchApi.enableProvider(provider.name, main.setings.get(`${provider.name}Username`), main.settings.get(`${provider.name}Password`))
                 } catch (error) {
                     return powercord.api.notices.sendToast('Powerrent', {
                         header: `Sign in failed for ${provider.name}, check settings`,
