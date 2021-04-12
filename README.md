@@ -13,6 +13,8 @@ Powerrent is a Powercord plugin that will satisfy all your pirating needs. As of
 Copy and paste the code below into the terminal for powercord's plugins folder
 ```
 git clone https://github.com/Crenshaw1312/Powerrent
+cd Powerrent
+npm i
 ```
 ### Settings
 **Max Search Results**
