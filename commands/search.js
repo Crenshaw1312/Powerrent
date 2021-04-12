@@ -19,6 +19,19 @@ module.exports = {
         // enable providers
         TorrentSearchApi.enablePublicProviders()
         main.settings.get('blacklistedSites').forEach(provider => TorrentSearchApi.disableProvider(provider))
+        // enable any PTs that there's a username and password for
+        TorrentSearchApi.getProviders().filter(p => !p.public).map((provider) => {
+            if (main.setings.get(`${provider.name}Username`) !== "" || main.setings.get(`${provider.name}Password` !== "")) {
+                try {
+                    await TorrentSearchApi.enableProvider(provider.name, main.setings.get(`${provider.name}Username`), main.settings.get(`${provider.name}Password`))
+                } catch (error) {
+                    return powercord.api.notices.sendToast('Powerrent', {
+                        header: `Sign in failed for ${provider.name}, check settings`,
+                        timeout: 5e3
+                    })
+                }
+            }
+       })
 
         // setup flags
         let flags = [
