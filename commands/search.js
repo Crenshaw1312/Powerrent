@@ -19,10 +19,20 @@ module.exports = {
         // enable providers
         // enable any PTs that there's a username and password for
         TorrentSearchApi.getProviders().filter(p => !p.public).map((provider) => {
+            let username = main.settings.get(`${provider.name}Username`)
+            let password = main.settings.get(`${provider.name}Password`)
+            if (username == "" || password == "" || !username || !password) return // if there is no password
+            // attempt to login and enable
             try {
-                TorrentSearchApi.enableProvider(provider.name, main.settings.get(`${provider.name}Username`), main.settings.get(`${provider.name}Password`))
+                TorrentSearchApi.enableProvider(provider.name, username, password)
             } catch (error) {
-                console.log(`Failed to log into ${provider.name}`)
+                // failed
+                powercord.api.notices.sendToast('Powerrent', {
+                    header: `Failed to log into ${provider.name}`,
+                    content: `(Username: ${username}) (Password: ${password})`,
+                    timeout: 10e3
+                })
+                console.error(error)
             }
         })
        TorrentSearchApi.enablePublicProviders()
@@ -74,7 +84,7 @@ module.exports = {
                 await powercord.api.notices.sendToast('Powerrent', {
                     header: `Could not search all trackers for the ${category.toLowerCase()} category`,
                     content: noSearch.join(", "),
-                    timeout: 30e3
+                    timeout: 10e3
                 })
             }
         }
