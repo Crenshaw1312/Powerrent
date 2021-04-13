@@ -14,7 +14,7 @@ module.exports = class PowerrentSettings extends React.PureComponent {
 
 		return (
             <div>
-              <FormTitle>Made by Crenshaw#1312 and <a href="https://disboard.org/server/766672915441385472" target="_blank">Team Pirate Haven</a><br></br>There is no support server for Powerrent as of now</FormTitle>
+              <FormTitle>Made by Crenshaw#1312 and <a href="https://disboard.org/server/766672915441385472" target="_blank">Team Pirate Haven</a><br></br><a href="https://discord.gg/CgapbDJ8GX" target="_blank">Join the support server! :3</a></FormTitle>
               <SliderInput
                 note="The max number of search results to get"
                 initialValue={ getSetting('searchMax', 25) }

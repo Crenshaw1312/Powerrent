@@ -26,7 +26,9 @@ module.exports = {
             }
         })
        TorrentSearchApi.enablePublicProviders()
-       main.settings.get('blacklistedSites').forEach(provider => TorrentSearchApi.disableProvider(provider))
+       for (let provider of (main.settings.get('blacklistedSites') || ["ThePirateBay", "KickassTorrents", "Yts"])) {
+           TorrentSearchApi.disableProvider(provider)
+       }
 
         // setup flags
         let flags = [
