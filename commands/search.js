@@ -17,8 +17,16 @@ module.exports = {
             })
         }
         // enable providers
-        TorrentSearchApi.enablePublicProviders()
-        main.settings.get('blacklistedSites').forEach(provider => TorrentSearchApi.disableProvider(provider))
+        // enable any PTs that there's a username and password for
+        TorrentSearchApi.getProviders().filter(p => !p.public).map((provider) => {
+            try {
+                TorrentSearchApi.enableProvider(provider.name, main.settings.get(`${provider.name}Username`), main.settings.get(`${provider.name}Password`))
+            } catch (error) {
+                console.log(`Failed to log into ${provider.name}`)
+            }
+        })
+       TorrentSearchApi.enablePublicProviders()
+       main.settings.get('blacklistedSites').forEach(provider => TorrentSearchApi.disableProvider(provider))
 
         // setup flags
         let flags = [
