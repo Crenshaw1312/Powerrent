@@ -20,8 +20,7 @@ module.exports = {
         // enable any PTs that there's a username and password for
         TorrentSearchApi.getProviders().filter(p => !p.public).map((provider) => {
             try {
-                TorrentSearchApi.enableProvider(provider.name, main.setings.get(`${provider.name}Username`), main.settings.get(`${provider.name}Password`))
-                console.log(main.setings.get(`${provider.name}Username`) + " " + main.settings.get(`${provider.name}Password`))
+                TorrentSearchApi.enableProvider(provider.name, main.settings.get(`${provider.name}Username`), main.settings.get(`${provider.name}Password`))
             } catch (error) {
                 console.log(`Failed to log into ${provider.name}`)
             }
