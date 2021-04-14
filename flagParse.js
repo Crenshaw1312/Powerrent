@@ -1,4 +1,4 @@
-exports.flagParse = async (flags, string) => {
+exports.flagParse = (flags, string) => {
     // find all groups
     let located = string.match(/"[^"]*"|[^"\s]*/img).filter(str => str !== '');
     const map = new Map();
