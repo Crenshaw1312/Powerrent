@@ -35,6 +35,11 @@ module.exports = {
             if (activity = activity.find(act => act.type == 2)) {
                 search = activity.details
                 category = "Music"
+            } else {
+                return powercord.api.notices.sendToast('PowerrentNotif', {
+                    header: 'No \"Listening to...\" presnce found',
+                    timeout: 3e3
+                })
             }
         } else {
             search = parameters.get("noFlag").join(" ")
