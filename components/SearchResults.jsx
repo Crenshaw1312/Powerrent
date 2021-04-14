@@ -29,10 +29,11 @@ module.exports = class SearchResults extends React.PureComponent {
     results.forEach(result => {
       resultsList.push(
           <div className={`${size16} ${marginBottom20}`}>
-              <FormTitle tag='h3'><a herf={result.desc} target="_blank">{result.title}</a></FormTitle>
+              <FormTitle tag='h3'><a href={result.desc} target="_blank">{result.title}</a></FormTitle>
               Provider: {result.provider}<br></br>
               Size: {result.size} - Seeds: {result.seeds} - Peers: {result.peers}
               <hr class="rounded"></hr>
+              { results[amount - 1] !== result ? "" : <div><br></br><a href="https://discord.com/invite/CgapbDJ8GX" tag="_blank">Support server</a><br></br>Made by Crenshaw#1312 and Team Pirate Haven</div>}
           </div>
         );
     });
