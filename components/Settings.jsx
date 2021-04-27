@@ -13,7 +13,7 @@ module.exports = class PowerrentSettings extends React.PureComponent {
 		const { getSetting, toggleSetting, updateSetting } = this.props;
 
 		return (
-            <div>
+            <>
               <FormTitle>Made by Crenshaw#1312 and <a href="https://disboard.org/server/766672915441385472" target="_blank">Team Pirate Haven</a><br></br><a href="https://discord.gg/CgapbDJ8GX" target="_blank">Join the support server! :3</a><br></br>Special thanks to Geez,YourYoghurtIsNotYummyAtAll
 #6754 for all the help!</FormTitle>
               <SliderInput
@@ -69,7 +69,18 @@ module.exports = class PowerrentSettings extends React.PureComponent {
                   <hr class="solid"></hr>
                 </div>)}
               </Category>
-                </div>
+
+              <SliderInput
+                note="Amount of links to make direct magnets, from top down"
+                initialValue={ getSetting('magnatize', 5) }
+                minValue={ 1 } maxValue={ 100 }
+                markers={[ 1, 5, 10, 15, 25, 50, 75, 100 ]}
+                stickToMarkers={true}
+                onValueChange={ v => updateSetting('magnatize', v) }
+              >
+                Magnatize
+              </SliderInput>
+            </>
 		);
 	}
 

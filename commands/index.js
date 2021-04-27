@@ -4,4 +4,4 @@ require('fs')
   .forEach(filename => {
     const moduleName = filename.split('.')[0];
     exports[moduleName] = require(`${__dirname}/${filename}`);
-  });
+  })

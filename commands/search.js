@@ -109,7 +109,7 @@ module.exports = {
         }
 
         // search
-        const torrents = await TorrentSearchApi.search(search, category, parameters.get('max') ? parameters.get('max')[0] : main.settings.get('searchMax'));
+        let torrents = await TorrentSearchApi.search(search, category, parameters.get('max') ? parameters.get('max')[0] : main.settings.get('searchMax'));
         // no results
         if (!torrents[0]) {
             return powercord.api.notices.sendToast('PowerrentNotif', {
@@ -117,6 +117,18 @@ module.exports = {
                 timeout: 3e3
             })
         }
+        // magnetize
+        for (torrent of torrents.reverse()) {
+            let index = torrents.indexOf(torrent)
+            if (index < main.settings.get("magnatize", 5)+1) {
+                torrents[index].title = "🔗" + torrents[index].title
+                continue
+            }
+            torrents[index].desc = TorrentSearchApi.getMagnet(torrent)
+            torrents[index].title = "🧲" + torrents[index].title
+        }
+        torrents = torrents.reverse()
+
         return openModal(() => React.createElement(SearchResults, {results: torrents, search: `Searched for \"${search}\" in ${category} - \\  _ \\`}));
 
     }
