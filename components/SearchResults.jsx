@@ -33,7 +33,7 @@ module.exports = class SearchResults extends React.PureComponent {
               Provider: {result.provider}<br></br>
               Size: {result.size} - Seeds: {result.seeds} - Peers: {result.peers}
               <hr class="rounded"></hr>
-              { results[amount - 1] !== result ? "" : <div><br></br><a href="https://discord.com/invite/CgapbDJ8GX" tag="_blank">Support server</a><br></br>Made by Crenshaw#1312 and Team Pirate Haven</div>}
+              { results[amount - 1] !== result ? "" : <div><br></br><a href="https://discord.com/invite/Qx2hyttRsU" tag="_blank">Support server</a><br></br>Made by Crenshaw#1312 and Team Pirate Haven</div>}
           </div>
         );
     });
