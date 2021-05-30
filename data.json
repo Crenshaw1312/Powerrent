@@ -1,0 +1,28 @@
+{
+    "newsDefault": [{
+      "name": "General Piracy",
+      "tag": "piracy",
+      "enabled": true
+    }, {
+      "name": "Top 10 Weekly", 
+      "tag": "dvdrip",
+      "enabled": true
+    }, {
+      "name": "Crypto Currency",
+      "tag": "cryptocurrency",
+      "enabled": false
+    }, {
+      "name": "Lawsuits",
+      "tag": "lawsuits",
+      "enabled": false
+    }, {
+      "name": "Privacy",
+      "tag": "privacy",
+      "enabled": true
+    }],
+    "repackLocations": [{
+      "repacker": "bulldog",
+      "link": "https://discord.gg/25VfgXb5Mp",
+      "discordChannelID": "80091130779141810" 
+    }]
+}

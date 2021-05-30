@@ -1,21 +1,28 @@
 const { React } = require('powercord/webpack');
 const { SwitchItem, TextInput, Category, SliderInput } = require('powercord/components/settings');
-const { FormTitle, Button } = require('powercord/components');
+const { FormTitle } = require('powercord/components');
 const TorrentSearchApi = require('torrent-search-api');
+const data = require('../data.json')
 
 module.exports = class PowerrentSettings extends React.PureComponent {
 	constructor(props) {
 		super(props);
-		this.state = { category0Opened: false, category1Opened: false };
+		this.state = { 
+      category0Opened: false,
+      category1Opened: false,
+      category2Opened: false,
+    }
 	}
 
 	render() {
-		const { getSetting, toggleSetting, updateSetting } = this.props;
+		const { getSetting, updateSetting } = this.props;
+    let tags = getSetting('tags', data.newsDefault)
+    if (data.newsDefault.length != tags) tags = data.newsDefault
 
 		return (
             <>
-              <FormTitle>Made by Crenshaw#1312 and <a href="https://disboard.org/server/766672915441385472" target="_blank">Team Pirate Haven</a><br></br><a href="https://discord.gg/CgapbDJ8GX" target="_blank">Join the support server! :3</a><br></br>Special thanks to Geez,YourYoghurtIsNotYummyAtAll
-#6754 for all the help!</FormTitle>
+            <FormTitle>Made by <a href="https://discord.com/invite/Qx2hyttRsU" target="_blank">Crenshaw#1312</a> and <a href="https://disboard.org/server/766672915441385472" target="_blank">Team Pirate Haven</a></FormTitle>
+            <br></br><br></br>
               <SliderInput
                 note="The max number of search results to get"
                 initialValue={ getSetting('searchMax', 25) }
@@ -25,6 +32,17 @@ module.exports = class PowerrentSettings extends React.PureComponent {
                 onValueChange={ v => updateSetting('searchMax', v) }
               >
                 Max Search
+              </SliderInput>
+
+              <SliderInput
+                note="Amount of links to make direct magnets, from top down"
+                initialValue={ getSetting('magnatize', 5) }
+                minValue={ 1 } maxValue={ 100 }
+                markers={[ 1, 5, 10, 15, 25, 50, 75, 100 ]}
+                stickToMarkers={true}
+                onValueChange={ v => updateSetting('magnatize', v) }
+              >
+                Magnatize
               </SliderInput>
 
                 <Category
@@ -70,16 +88,33 @@ module.exports = class PowerrentSettings extends React.PureComponent {
                 </div>)}
               </Category>
 
-              <SliderInput
-                note="Amount of links to make direct magnets, from top down"
-                initialValue={ getSetting('magnatize', 5) }
-                minValue={ 1 } maxValue={ 100 }
-                markers={[ 1, 5, 10, 15, 25, 50, 75, 100 ]}
-                stickToMarkers={true}
-                onValueChange={ v => updateSetting('magnatize', v) }
+              <Category
+                name='News'
+                description='Manage news categories'
+                opened={this.state.category2Opened}
+                onChange={() => this.setState({ category2Opened: !this.state.category2Opened })}
               >
-                Magnatize
-              </SliderInput>
+                <>
+                  <SwitchItem
+                    value={getSetting('showSnippet', true)}
+                    onChange={(val) => updateSetting('showSnippet', val)}
+                  >
+                    Show Article Snippet
+                  </SwitchItem>
+                  <hr class="solid"></hr>
+                  <br></br>
+                  {tags.map((category, index) => <SwitchItem
+                    value={category.enabled}
+                    note={<><a href={"https://torrentfreak.com/tag/" + category.tag} target="_blank">{"https://torrentfreak.com/tag/" + category.tag}</a></>}
+                    onChange={val => {
+                      tags[index].enabled = val
+                      updateSetting('tags', tags)
+                  }}
+                  >
+                  {category.name}
+                  </SwitchItem>)}
+                  </>
+              </Category>
             </>
 		);
 	}
