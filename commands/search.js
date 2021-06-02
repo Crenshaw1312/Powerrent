@@ -120,7 +120,7 @@ module.exports = {
         // magnetize
         for (torrent of torrents.reverse()) {
             let index = torrents.indexOf(torrent)
-            if (index < main.settings.get("magnatize", 5)+1) {
+            if (index > main.settings.get("magnatize", 5)+1) {
                 torrents[index].title = "🔗" + torrents[index].title
                 continue
             }
