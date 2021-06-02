@@ -21,8 +21,24 @@
       "enabled": true
     }],
     "repackLocations": [{
-      "repacker": "bulldog",
+      "repacker": "Bulldog",
       "link": "https://discord.gg/25VfgXb5Mp",
       "discordChannelID": "80091130779141810" 
+    }, {
+      "repacker": "REKULOUS",
+      "link": "https://disboard.org/server/813171554527215686",
+      "discordChannelID": "821740091009400862"
+    }, {
+      "repacker": "scOOt3r",
+      "link": "https://discord.gg/BWKyN8SgvM",
+      "site": "https://scooter-repacks.site/",
+      "rssFeed": "https://scooter-repacks.site/feed/",
+      "discordChannelID": "839058088740782132"
+    }, {
+      "repacker": "FLyzzy",
+      "link": "https://discord.gg/aDBhKQzaY5",
+      "site": "https://lefishe.rf.gd/",
+      "rssFeed": "https://lefishe.rf.gd/feed",
+      "discordChannelID": "799456865843019777"
     }]
 }
